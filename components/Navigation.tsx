@@ -27,12 +27,12 @@ export default function Navigation() {
 
   return (
     <nav className="bg-background/80 backdrop-blur-sm sticky top-0 z-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 border-b border-gray-600">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 border-b border-gray-600">
           {/* Logo/Name and Color Picker */}
           <div className="flex-shrink-0 flex items-center gap-3">
             <a href="/" className="text-lg font-semibold hover:text-gray-300 transition-colors">
-              Fahd Khattak
+              Home
             </a>
             {/* Color Theme Dropdown */}
             <div className="relative">
@@ -100,7 +100,11 @@ export default function Navigation() {
                       ? "/resume.pdf"
                       : item === "About"
                       ? "/about"
-                      : item === "My Work" || item === "Projects" || item === "Contact Me"
+                      : item === "My Work"
+                      ? "/my-work"
+                      : item === "Projects"
+                      ? "/my-personal-projects"
+                      : item === "Contact Me"
                       ? `/#${item.toLowerCase().replace(" ", "-")}`
                       : `#${item.toLowerCase().replace(" ", "-")}`
                   }
@@ -146,7 +150,11 @@ export default function Navigation() {
                         ? "/resume.pdf"
                         : item === "About"
                         ? "/about"
-                        : item === "My Work" || item === "Projects" || item === "Contact Me"
+                        : item === "My Work"
+                        ? "/my-work"
+                        : item === "Projects"
+                        ? "/my-personal-projects"
+                        : item === "Contact Me"
                         ? `/#${item.toLowerCase().replace(" ", "-")}`
                         : `#${item.toLowerCase().replace(" ", "-")}`
                     }

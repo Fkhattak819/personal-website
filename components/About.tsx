@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FiMapPin, FiMail, FiGithub, FiLinkedin } from "react-icons/fi";
 
 // UPDATE THESE LINKS
@@ -14,7 +15,7 @@ export default function About() {
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
         <div className="flex-1">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Hi, I&apos;m Fahd <span className="animate-wave">👋</span>
+            Hi, I&apos;m <Link href="/about" className="hover:opacity-80 transition-opacity">Fahd.</Link> <span className="animate-wave">👋</span>
           </h1>
           <div className="flex items-center gap-2 text-gray-400 mb-6">
             <FiMapPin className="w-4 h-4" />
