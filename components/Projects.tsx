@@ -36,15 +36,15 @@ export default function Projects() {
 
   return (
     <section id="projects" className="mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8">My personal projects</h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">My personal projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {personalProjects.map((project, index) => (
           <div
             key={index}
-            className="group relative flex flex-col overflow-hidden rounded-xl bg-[#111111] border border-neutral-600 hover:border-neutral-500 transition-all duration-300 hover:-translate-y-2 project-card"
+            className="group relative flex flex-col overflow-hidden rounded-xl bg-gray-50 dark:bg-[#111111] border border-gray-300 dark:border-neutral-600 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 hover:-translate-y-2 project-card"
           >
             {/* Image Area - taking up top portion */}
-            <div className="aspect-video w-full bg-neutral-800 relative overflow-hidden">
+            <div className="aspect-video w-full bg-gray-200 dark:bg-gray-200 relative overflow-hidden">
               {project.imageUrl ? (
                 <>
                   <Image
@@ -55,17 +55,17 @@ export default function Projects() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-90"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-50 dark:from-[#111111] via-transparent to-transparent opacity-90"></div>
                 </>
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center text-gray-600 text-sm">
+                <div className="absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-500 text-sm">
                   Project Screenshot
                 </div>
               )}
             </div>
             
             <div className="p-6 pt-0 flex flex-col flex-1">
-              <h3 className="text-xl font-bold mb-4 text-white">{project.title}</h3>
+              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">{project.title}</h3>
               
               <div className="flex flex-wrap gap-2 mb-4">
                 {project.technologies.map((tech, techIndex) => {
@@ -73,16 +73,16 @@ export default function Projects() {
                   return (
                     <div
                       key={techIndex}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-[#1C1C1C] border border-gray-300 dark:border-neutral-800 text-gray-900 dark:text-white"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-white border border-gray-300 dark:border-gray-300 text-gray-900 dark:text-gray-900"
                     >
-                      <Icon className="w-5 h-5" />
-                      <span className="text-sm font-medium">{tech.name}</span>
+                      <Icon className="w-5 h-5 text-gray-900" />
+                      <span className="text-sm font-medium text-gray-900">{tech.name}</span>
                     </div>
                   );
                 })}
               </div>
               
-              <p className="text-gray-400 mb-8 flex-1">{project.description}</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-8 flex-1">{project.description}</p>
               
               <button className="flex items-center gap-2 px-4 py-2 bg-white text-black border-2 border-black rounded-full w-fit hover:bg-gray-100 transition-all duration-300 font-medium text-sm group-hover:scale-105">
                 Learn more

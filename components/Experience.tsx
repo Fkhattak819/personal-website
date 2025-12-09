@@ -51,7 +51,7 @@ const experiences: ExperienceItem[] = [
 ];
 
 export default function Experience() {
-  const { themeColors, themeColor } = useTheme();
+  const { themeColors, themeColor, themeMode } = useTheme();
   const currentTheme = themeColors[themeColor];
 
   // Get solid colors and glow colors based on theme
@@ -74,7 +74,10 @@ export default function Experience() {
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Experience</h2>
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-400 dark:bg-white/30"></div>
+        <div 
+          className="absolute left-4 top-0 bottom-0 w-0.5 animate-timeline-grow" 
+          style={{ backgroundColor: themeMode === 'light' ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)' }}
+        ></div>
         
         <div className="space-y-4">
           {experiences.map((exp, index) => {
@@ -83,10 +86,11 @@ export default function Experience() {
               <div key={index} className="relative pl-12">
                 {/* Timeline dot */}
                 <div 
-                  className="absolute left-[11px] top-2 w-3 h-3 rounded-full z-10 border-2 border-gray-900 dark:border-white"
+                  className="absolute left-[11px] top-2 w-3 h-3 rounded-full z-10 border-2 border-gray-900 dark:border-white animate-dot-appear"
                   style={{ 
                     backgroundColor: colors.solid,
-                    boxShadow: glowShadow
+                    boxShadow: glowShadow,
+                    animationDelay: `${0.3 + index * 0.2}s`
                   }}
                 ></div>
                 

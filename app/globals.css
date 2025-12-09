@@ -86,6 +86,38 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
+@keyframes timelineGrow {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  100% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+.animate-timeline-grow {
+  animation: timelineGrow 1s ease-out forwards;
+  transform-origin: top;
+}
+
+@keyframes dotAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-dot-appear {
+  animation: dotAppear 0.5s ease-out forwards;
+  opacity: 0;
+}
+
 .grayscale-logo {
   filter: grayscale(100%) brightness(0.9);
   will-change: filter;
@@ -113,6 +145,25 @@ html.light .text-white {
   color: #111111;
 }
 
+/* Ensure text is visible in light mode */
+html.light body {
+  color: #111111;
+}
+
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #111111;
+}
+
+html.light .text-gray-900,
+html.light span.text-gray-900 {
+  color: #111111 !important;
+}
+
 html.light .text-gray-300,
 html.light .text-gray-400 {
   color: #4b5563;
@@ -120,6 +171,14 @@ html.light .text-gray-400 {
 
 html.light .text-gray-500 {
   color: #6b7280;
+}
+
+html.light .text-gray-600 {
+  color: #4b5563;
+}
+
+html.light .text-gray-700 {
+  color: #374151;
 }
 
 html.light .border-gray-600,

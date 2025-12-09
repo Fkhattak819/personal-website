@@ -82,7 +82,7 @@ export default function TechStack() {
               return (
                 <div key={tech.name} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium">{tech.name}</span>
+                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
                 </div>
               );
             })}
@@ -95,7 +95,7 @@ export default function TechStack() {
               return (
                 <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium">{tech.name}</span>
+                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
                 </div>
               );
             })}
@@ -110,7 +110,7 @@ export default function TechStack() {
               return (
                 <div key={tech.name} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium">{tech.name}</span>
+                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
                 </div>
               );
             })}
@@ -123,7 +123,7 @@ export default function TechStack() {
               return (
                 <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium">{tech.name}</span>
+                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
                 </div>
               );
             })}

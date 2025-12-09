@@ -28,7 +28,7 @@ export default function Education() {
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white text-left">Background Education</h2>
       <div className="relative mt-12">
         {/* Timeline line */}
-        <div className="absolute left-1/2 -top-10 -bottom-10 w-0.5 bg-gray-300 dark:bg-gray-200 -translate-x-1/2 hidden md:block"></div>
+        <div className="absolute left-1/2 -top-10 -bottom-10 w-0.5 bg-black/60 dark:bg-white/60 -translate-x-1/2 hidden md:block"></div>
         
         <div className="space-y-16">
           {education.map((item, index) => (
