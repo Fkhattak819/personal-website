@@ -67,7 +67,7 @@ export default function Experience() {
   };
 
   const colors = getDotColors();
-  const glowShadow = `0 0 8px rgba(${colors.rgb},0.8), 0 0 16px rgba(${colors.rgb},0.6), 0 0 24px rgba(${colors.rgb},0.4), 0 0 32px rgba(${colors.rgb},0.3)`;
+  const glowShadow = `0 0 4px rgba(${colors.rgb},0.3), 0 0 8px rgba(${colors.rgb},0.2)`;
 
   return (
     <section id="experience" className="mb-12">
