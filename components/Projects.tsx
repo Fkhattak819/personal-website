@@ -73,7 +73,7 @@ export default function Projects() {
                   return (
                     <div
                       key={techIndex}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#1C1C1C] border border-neutral-800 text-white"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white dark:bg-[#1C1C1C] border border-gray-300 dark:border-neutral-800 text-gray-900 dark:text-white"
                     >
                       <Icon className="w-5 h-5" />
                       <span className="text-sm font-medium">{tech.name}</span>
@@ -84,7 +84,7 @@ export default function Projects() {
               
               <p className="text-gray-400 mb-8 flex-1">{project.description}</p>
               
-              <button className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-full w-fit hover:bg-gray-200 transition-all duration-300 font-medium text-sm group-hover:scale-105">
+              <button className="flex items-center gap-2 px-4 py-2 bg-white text-black border-2 border-black rounded-full w-fit hover:bg-gray-100 transition-all duration-300 font-medium text-sm group-hover:scale-105">
                 Learn more
                 <FiArrowRight />
               </button>

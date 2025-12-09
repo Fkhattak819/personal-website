@@ -13,14 +13,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-background">
-      <body className="antialiased bg-background text-white relative">
+    <html lang="en" className="bg-background dark">
+      <body className="antialiased bg-background relative" style={{ color: 'var(--foreground)' }}>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
                   const theme = localStorage.getItem('themeColor') || 'purple';
+                  const themeMode = localStorage.getItem('themeMode') || 'dark';
                   const colorMap = {
                     purple: { rgb: "168, 85, 247", shadow: "rgba(168, 85, 247, 0.1)", glow: "rgba(168, 85, 247, 0.8)" },
                     green: { rgb: "34, 197, 94", shadow: "rgba(34, 197, 94, 0.1)", glow: "rgba(34, 197, 94, 0.8)" },
@@ -33,6 +34,8 @@ export default function RootLayout({
                   root.style.setProperty('--theme-color', colors.rgb);
                   root.style.setProperty('--theme-shadow', colors.shadow);
                   root.style.setProperty('--theme-glow', colors.glow);
+                  root.classList.remove('light', 'dark');
+                  root.classList.add(themeMode === 'light' ? 'light' : 'dark');
                 } catch (e) {}
               })();
             `,

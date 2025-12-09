@@ -27,7 +27,7 @@ export default function About() {
         <div className="flex gap-4">
           <a
             href={SOCIAL_LINKS.email}
-            className="text-gray-200 hover:text-white transition-colors"
+            className="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
             aria-label="Email"
           >
             <FiMail size={24} />
@@ -36,7 +36,7 @@ export default function About() {
             href={SOCIAL_LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-200 hover:text-white transition-colors"
+            className="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
             aria-label="GitHub"
           >
             <FiGithub size={24} />
@@ -45,7 +45,7 @@ export default function About() {
             href={SOCIAL_LINKS.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-200 hover:text-white transition-colors"
+            className="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors"
             aria-label="LinkedIn"
           >
             <FiLinkedin size={24} />

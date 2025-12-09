@@ -3,10 +3,13 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 type ThemeColor = "purple" | "green" | "blue" | "red" | "yellow";
+type ThemeMode = "light" | "dark";
 
 interface ThemeContextType {
   themeColor: ThemeColor;
   setThemeColor: (color: ThemeColor) => void;
+  themeMode: ThemeMode;
+  setThemeMode: (mode: ThemeMode) => void;
   themeColors: {
     [key in ThemeColor]: {
       bg: string;
@@ -21,6 +24,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   // Initialize theme - will be synced from localStorage in useEffect
   const [themeColor, setThemeColorState] = useState<ThemeColor>("purple");
+  const [themeMode, setThemeModeState] = useState<ThemeMode>("dark");
 
   const themeColors = {
     purple: {
@@ -70,6 +74,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.style.setProperty("--theme-glow", colors.glow);
   };
 
+  const setThemeMode = (mode: ThemeMode) => {
+    setThemeModeState(mode);
+    localStorage.setItem("themeMode", mode);
+    
+    // Update HTML class for theme mode
+    if (typeof window !== 'undefined') {
+      const root = document.documentElement;
+      root.classList.remove("light", "dark");
+      root.classList.add(mode);
+    }
+  };
+
   useEffect(() => {
     // On mount: sync state from localStorage and update CSS variables
     if (typeof window !== 'undefined') {
@@ -92,6 +108,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       root.style.setProperty("--theme-color", colors.rgb);
       root.style.setProperty("--theme-shadow", colors.shadow);
       root.style.setProperty("--theme-glow", colors.glow);
+
+      // Initialize theme mode
+      const savedMode = localStorage.getItem("themeMode") as ThemeMode;
+      const modeToUse = (savedMode === 'light' || savedMode === 'dark') ? savedMode : 'dark';
+      setThemeModeState(modeToUse);
+      root.classList.remove("light", "dark");
+      root.classList.add(modeToUse);
     }
   }, []); // Only run on mount
 
@@ -115,7 +138,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [themeColor]);
 
   return (
-    <ThemeContext.Provider value={{ themeColor, setThemeColor, themeColors }}>
+    <ThemeContext.Provider value={{ themeColor, setThemeColor, themeMode, setThemeMode, themeColors }}>
       {children}
     </ThemeContext.Provider>
   );

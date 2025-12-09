@@ -80,7 +80,7 @@ export default function TechStack() {
             {programmingLanguages.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={tech.name} className="flex items-center gap-2 text-gray-200 hover:text-white transition-colors">
+                <div key={tech.name} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
@@ -93,7 +93,7 @@ export default function TechStack() {
             {programmingLanguages.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-200 hover:text-white transition-colors">
+                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
@@ -108,7 +108,7 @@ export default function TechStack() {
             {technologies.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={tech.name} className="flex items-center gap-2 text-gray-200 hover:text-white transition-colors">
+                <div key={tech.name} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
@@ -121,7 +121,7 @@ export default function TechStack() {
             {technologies.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-200 hover:text-white transition-colors">
+                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
                   <Icon className="w-6 h-6" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
