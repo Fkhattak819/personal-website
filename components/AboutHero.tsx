@@ -3,7 +3,7 @@ import { FiMapPin, FiMail, FiGithub, FiLinkedin } from "react-icons/fi";
 const SOCIAL_LINKS = {
   github: "https://github.com/Fkhattak819",
   linkedin: "https://www.linkedin.com/in/fahd-khattak/",
-  email: "Fkhattak819@gmail.com",
+  email: "mailto:Fkhattak819@gmail.com",
   resume: "/resume.pdf"
 };
 
@@ -12,7 +12,7 @@ export default function AboutHero() {
     <section id="detailed-about" className="mb-8">
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Fahd Khattak</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Hi, I&apos;m Fahd 👋</h1>
           <div className="flex items-center gap-2 text-gray-400">
             <FiMapPin className="w-4 h-4" />
             <span className="text-sm">Lafayette, Louisiana</span>

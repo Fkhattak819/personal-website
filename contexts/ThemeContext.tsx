@@ -77,12 +77,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       const validThemes: ThemeColor[] = ['purple', 'green', 'blue', 'red', 'yellow'];
       const themeToUse = (savedTheme && validThemes.includes(savedTheme)) ? savedTheme : 'purple';
       
-      // Update state if different
-      if (themeToUse !== themeColor) {
-        setThemeColorState(themeToUse);
-      }
+      setThemeColorState(themeToUse);
       
-      // Always update CSS variables
+      // Update CSS variables
       const root = document.documentElement;
       const colorMap = {
         purple: { rgb: "168, 85, 247", shadow: "rgba(168, 85, 247, 0.1)", glow: "rgba(168, 85, 247, 0.8)" },
@@ -99,7 +96,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []); // Only run on mount
 
   useEffect(() => {
-    // Update CSS variables whenever themeColor changes (after mount)
+    // Update CSS variables whenever themeColor changes
     if (typeof window !== 'undefined') {
       const root = document.documentElement;
       const colorMap = {

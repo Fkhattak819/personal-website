@@ -53,3 +53,38 @@ body {
   animation: scroll 60s linear infinite;
   will-change: transform; /* Optimize for GPU acceleration */
 }
+
+@keyframes wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+}
+
+.animate-wave {
+  display: inline-block;
+  animation: wave 3s ease-in-out infinite;
+  transform-origin: 70% 70%;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.grayscale-logo {
+  filter: grayscale(100%) brightness(0.9);
+  will-change: filter;
+}
+
+.project-card {
+  box-shadow: 0 0 0 transparent;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover {
+  box-shadow: 0 20px 25px -5px var(--theme-shadow), 0 8px 10px -6px var(--theme-shadow);
+}

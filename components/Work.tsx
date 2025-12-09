@@ -42,21 +42,12 @@ export default function Work() {
 
   return (
     <section id="my-work" className="mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8">My work</h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-8">My Work</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="group relative flex flex-col overflow-hidden rounded-xl bg-[#111111] border border-neutral-600 hover:border-neutral-500 transition-all duration-300 hover:-translate-y-2"
-            style={{
-              boxShadow: '0 0 0 transparent',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 20px 25px -5px var(--theme-shadow), 0 8px 10px -6px var(--theme-shadow)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = '0 0 0 transparent';
-            }}
+            className="group relative flex flex-col overflow-hidden rounded-xl bg-[#111111] border border-neutral-600 hover:border-neutral-500 transition-all duration-300 hover:-translate-y-2 project-card"
           >
             {/* Image Area - taking up top portion */}
             <div className="aspect-video w-full bg-neutral-800 relative overflow-hidden">

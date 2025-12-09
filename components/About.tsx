@@ -4,7 +4,7 @@ import { FiMapPin, FiMail, FiGithub, FiLinkedin } from "react-icons/fi";
 const SOCIAL_LINKS = {
   github: "https://github.com/Fkhattak819",
   linkedin: "https://www.linkedin.com/in/fahd-khattak/",
-  email: "fkhattak819@gmail.com",
+  email: "mailto:fkhattak819@gmail.com",
   resume: "/resume.pdf"
 };
 
@@ -13,7 +13,9 @@ export default function About() {
     <section id="about" className="mb-12">
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
         <div className="flex-1">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Fahd Khattak</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            Hi, I&apos;m Fahd <span className="animate-wave">👋</span>
+          </h1>
           <div className="flex items-center gap-2 text-gray-400 mb-6">
             <FiMapPin className="w-4 h-4" />
             <span className="text-sm">Lafayette, Louisiana</span>

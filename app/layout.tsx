@@ -29,9 +29,10 @@ export default function RootLayout({
                     yellow: { rgb: "234, 179, 8", shadow: "rgba(234, 179, 8, 0.1)", glow: "rgba(234, 179, 8, 0.8)" }
                   };
                   const colors = colorMap[theme] || colorMap.purple;
-                  document.documentElement.style.setProperty('--theme-color', colors.rgb);
-                  document.documentElement.style.setProperty('--theme-shadow', colors.shadow);
-                  document.documentElement.style.setProperty('--theme-glow', colors.glow);
+                  const root = document.documentElement;
+                  root.style.setProperty('--theme-color', colors.rgb);
+                  root.style.setProperty('--theme-shadow', colors.shadow);
+                  root.style.setProperty('--theme-glow', colors.glow);
                 } catch (e) {}
               })();
             `,
