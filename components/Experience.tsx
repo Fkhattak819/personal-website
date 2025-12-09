@@ -71,10 +71,10 @@ export default function Experience() {
 
   return (
     <section id="experience" className="mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8">Experience</h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Experience</h2>
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-white/30"></div>
+        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-white/30"></div>
         
         <div className="space-y-4">
           {experiences.map((exp, index) => {
@@ -83,7 +83,7 @@ export default function Experience() {
               <div key={index} className="relative pl-12">
                 {/* Timeline dot */}
                 <div 
-                  className="absolute left-[11px] top-2 w-3 h-3 rounded-full z-10 border-2 border-white"
+                  className="absolute left-[11px] top-2 w-3 h-3 rounded-full z-10 border-2 border-gray-900 dark:border-white"
                   style={{ 
                     backgroundColor: colors.solid,
                     boxShadow: glowShadow
@@ -92,7 +92,7 @@ export default function Experience() {
                 
                 <div className="flex items-start gap-4">
                   {/* Company Logo */}
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-white/5 border border-neutral-700 flex items-center justify-center overflow-hidden">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-neutral-700 flex items-center justify-center overflow-hidden">
                     {exp.logoImage ? (
                       <Image
                         src={exp.logoImage}
@@ -103,7 +103,7 @@ export default function Experience() {
                       />
                     ) : LogoIcon ? (
                       <LogoIcon 
-                        className="w-6 h-6 text-white grayscale-logo" 
+                        className="w-6 h-6 text-gray-900 dark:text-white grayscale-logo" 
                       />
                     ) : null}
                   </div>
@@ -114,15 +114,15 @@ export default function Experience() {
                         href={exp.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-lg font-semibold mb-1 block hover:opacity-80 transition-opacity"
+                        className="text-lg font-semibold mb-1 block hover:opacity-80 transition-opacity text-gray-900 dark:text-white"
                       >
                         {exp.company}
                       </a>
                     ) : (
-                      <h3 className="text-lg font-semibold mb-1">{exp.company}</h3>
+                      <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">{exp.company}</h3>
                     )}
-                    <p className="text-sm text-gray-400 mb-1">{exp.role}</p>
-                    <p className="text-xs text-gray-500">{exp.period}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{exp.role}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-500">{exp.period}</p>
                   </div>
                 </div>
               </div>
