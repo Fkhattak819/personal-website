@@ -74,7 +74,7 @@ export default function Experience() {
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Experience</h2>
       <div className="relative">
         {/* Timeline line */}
-        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-white/30"></div>
+        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-400 dark:bg-white/30"></div>
         
         <div className="space-y-4">
           {experiences.map((exp, index) => {
@@ -92,7 +92,7 @@ export default function Experience() {
                 
                 <div className="flex items-start gap-4">
                   {/* Company Logo */}
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-neutral-700 flex items-center justify-center overflow-hidden">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gray-50 dark:bg-white/5 border-2 border-gray-400 dark:border-neutral-700 flex items-center justify-center overflow-hidden">
                     {exp.logoImage ? (
                       <Image
                         src={exp.logoImage}
@@ -103,7 +103,7 @@ export default function Experience() {
                       />
                     ) : LogoIcon ? (
                       <LogoIcon 
-                        className="w-6 h-6 text-gray-900 dark:text-white grayscale-logo" 
+                        className="w-6 h-6 text-gray-900 dark:text-white" 
                       />
                     ) : null}
                   </div>

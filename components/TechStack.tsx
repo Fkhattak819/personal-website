@@ -67,7 +67,7 @@ const technologies = [
 export default function TechStack() {
   return (
     <section id="languages-and-technologies" className="mb-12 overflow-hidden">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8">Languages and Technologies</h2>
+      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Languages and Technologies</h2>
       
       <div className="relative w-full">
         {/* Gradient masks for smooth fade edges */}
@@ -80,8 +80,8 @@ export default function TechStack() {
             {programmingLanguages.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={tech.name} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6" />
+                <div key={tech.name} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
+                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
               );
@@ -93,8 +93,8 @@ export default function TechStack() {
             {programmingLanguages.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6" />
+                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
+                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
               );
@@ -108,8 +108,8 @@ export default function TechStack() {
             {technologies.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={tech.name} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6" />
+                <div key={tech.name} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
+                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
               );
@@ -121,8 +121,8 @@ export default function TechStack() {
             {technologies.map((tech) => {
               const Icon = tech.icon;
               return (
-                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6" />
+                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
+                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
                   <span className="text-lg font-medium">{tech.name}</span>
                 </div>
               );
