@@ -165,23 +165,26 @@ export default function GameDeveloperPage() {
           <section>
             <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Learning Outcomes</h3>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-              Building CleverCards provided a meaningful exploration of native Android development, leading to a deeper 
-              appreciation for native frameworks like Jetpack Compose compared to cross-platform solutions like Flutter.
+              Working on Fortnite creative projects provided a meaningful exploration of collaborative game development, 
+              leading to a deeper appreciation for how design, scripting, and content creation come together in a live, 
+              player-driven environment.
             </p>
             <ul className="space-y-3 text-gray-600 dark:text-gray-400">
               <li>
-                <span className="font-semibold text-gray-900 dark:text-white">The power of native development:</span>{" "}
-                Greater control over UI elements and tighter integration with Android&apos;s ecosystem for a smoother user experience.
+                <span className="font-semibold text-gray-900 dark:text-white">The power of teamwork:</span>{" "}
+                Collaborating with teammates across different skill sets (such as level designers, scripters, and content 
+                creators) highlighted how clear communication and role alignment are essential for delivering polished gameplay 
+                experiences.
               </li>
               <li>
-                <span className="font-semibold text-gray-900 dark:text-white">Balancing functionality with simplicity:</span>{" "}
-                The challenge of developing an app with features like image generation (via DALL-E 3) while maintaining a clean, 
-                intuitive UI without overcomplicating the design.
+                <span className="font-semibold text-gray-900 dark:text-white">Balancing creativity with performance:</span>{" "}
+                Designing engaging mechanics and systems while maintaining performance, readability, and simplicity required 
+                thoughtful iteration to avoid overcomplicating gameplay or negatively impacting the player experience.
               </li>
               <li>
-                <span className="font-semibold text-gray-900 dark:text-white">Problem-solving in real-world scenarios:</span>{" "}
-                Integrating Firebase for authentication and database management prompted deeper thought about data consistency, 
-                security, and user privacy.
+                <span className="font-semibold text-gray-900 dark:text-white">Adapting in real-world production cycles:</span>{" "}
+                Working in fast-paced, constantly evolving environments emphasized the importance of continuous learning, 
+                responding to player feedback, and updating features to align with community trends and expectations.
               </li>
             </ul>
           </section>
