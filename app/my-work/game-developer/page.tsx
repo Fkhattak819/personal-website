@@ -25,7 +25,7 @@ const games: GameInfo[] = [
   {
     thumbnail: "Goofy Boxfight.jpeg",
     dateCreated: "Aug 2024",
-    plays: "50.5M",
+    plays: "20M",
     peakPlayers: "60K",
   },
   {
@@ -83,19 +83,19 @@ export default function GameDeveloperPage() {
                   sizes="256px"
                 />
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
-                  <div className="text-white text-center space-y-2">
+                <div className="absolute inset-0 bg-white/90 dark:bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
+                  <div className="text-gray-900 dark:text-white text-center space-y-2">
                     <div>
-                      <p className="text-xs text-gray-400">Date Created</p>
-                      <p className="text-sm font-semibold">{game.dateCreated}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Date Created</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{game.dateCreated}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">Total Plays</p>
-                      <p className="text-sm font-semibold">{game.plays}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Total Plays</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{game.plays}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">Peak Players</p>
-                      <p className="text-sm font-semibold">{game.peakPlayers}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Peak Players</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{game.peakPlayers}</p>
                     </div>
                   </div>
                 </div>
@@ -115,19 +115,19 @@ export default function GameDeveloperPage() {
                   sizes="256px"
                 />
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
-                  <div className="text-white text-center space-y-2">
+                <div className="absolute inset-0 bg-white/90 dark:bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-4">
+                  <div className="text-gray-900 dark:text-white text-center space-y-2">
                     <div>
-                      <p className="text-xs text-gray-400">Date Created</p>
-                      <p className="text-sm font-semibold">{game.dateCreated}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Date Created</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{game.dateCreated}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">Total Plays</p>
-                      <p className="text-sm font-semibold">{game.plays}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Total Plays</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{game.plays}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">Peak Players</p>
-                      <p className="text-sm font-semibold">{game.peakPlayers}</p>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Peak Players</p>
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{game.peakPlayers}</p>
                     </div>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ export default function GameDeveloperPage() {
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
               Yes I know half of them are brainrot, but you gotta play the game to win it. I&apos;ve been making maps since June 2023 
               and have enjoyed every step of the way. My proudest achievement was helping develop the backend of another creator&apos;s 
-              map: Goofy Boxfights which sits at 50+ million plays and 60,000 peak players.
+              map: Goofy Boxfights which sits at 20+ million plays and 60,000 peak players.
             </p>
           </section>
 
