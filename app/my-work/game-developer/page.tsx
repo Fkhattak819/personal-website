@@ -12,45 +12,45 @@ interface GameInfo {
 const games: GameInfo[] = [
   {
     thumbnail: "Brainrot 1v1v1 Reload.png",
-    dateCreated: "October 2025",
+    dateCreated: "Oct 2025",
     plays: "10K",
     peakPlayers: "500",
   },
   {
     thumbnail: "Choose Your Hero Box PVP.png",
     dateCreated: "Mar 2024",
-    plays: "1.8M",
-    peakPlayers: "8.9K",
+    plays: "1.1M",
+    peakPlayers: "1.2K",
   },
   {
     thumbnail: "Goofy Boxfight.jpeg",
-    dateCreated: "Feb 2024",
-    plays: "3.2M",
-    peakPlayers: "15.1K",
+    dateCreated: "Aug 2024",
+    plays: "50.5M",
+    peakPlayers: "60K",
   },
   {
     thumbnail: "Greasy One Shot.png",
-    dateCreated: "Dec 2023",
-    plays: "1.2M",
-    peakPlayers: "6.5K",
+    dateCreated: "Jun 2023",
+    plays: "2.4K",
+    peakPlayers: "220",
   },
   {
     thumbnail: "HeroesTilted.png",
-    dateCreated: "Apr 2024",
-    plays: "950K",
-    peakPlayers: "5.2K",
+    dateCreated: "May 2024",
+    plays: "359K",
+    peakPlayers: "400",
   },
   {
     thumbnail: "Medallion Free For All.png",
-    dateCreated: "May 2024",
-    plays: "1.5M",
+    dateCreated: "April 2024",
+    plays: "300K",
     peakPlayers: "9.8K",
   },
   {
     thumbnail: "Ultimate Goofy BoxFights.png",
-    dateCreated: "Jun 2024",
-    plays: "4.1M",
-    peakPlayers: "18.7K",
+    dateCreated: "Dec 2024",
+    plays: "800K",
+    peakPlayers: "2.7K",
   },
 ];
 
@@ -144,8 +144,8 @@ export default function GameDeveloperPage() {
           <section>
             <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Overview</h3>
             <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              Yes I know half of them are brainrot, but you gotta play the game to win it. I've been making maps since June 2023 
-              and have enjoyed every step of the way. My proudest achievement was helping develop the backend of another creator's 
+              Yes I know half of them are brainrot, but you gotta play the game to win it. I&apos;ve been making maps since June 2023 
+              and have enjoyed every step of the way. My proudest achievement was helping develop the backend of another creator&apos;s 
               map: Goofy Boxfights which sits at 50+ million plays and 60,000 peak players.
             </p>
           </section>
@@ -171,7 +171,7 @@ export default function GameDeveloperPage() {
             <ul className="space-y-3 text-gray-600 dark:text-gray-400">
               <li>
                 <span className="font-semibold text-gray-900 dark:text-white">The power of native development:</span>{" "}
-                Greater control over UI elements and tighter integration with Android's ecosystem for a smoother user experience.
+                Greater control over UI elements and tighter integration with Android&apos;s ecosystem for a smoother user experience.
               </li>
               <li>
                 <span className="font-semibold text-gray-900 dark:text-white">Balancing functionality with simplicity:</span>{" "}
@@ -191,4 +191,3 @@ export default function GameDeveloperPage() {
     </main>
   );
 }
-
