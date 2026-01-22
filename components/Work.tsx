@@ -25,6 +25,7 @@ const projects: Project[] = [
       { name: "TypeScript", icon: SiTypescript },
       { name: "Minio", icon: SiMinio },
     ],
+    imageUrl: "/Thumnails/fortnite-main.jpg",
   },
   {
     id: "rail-car-seal-detection",

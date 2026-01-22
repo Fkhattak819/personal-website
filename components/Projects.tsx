@@ -23,12 +23,14 @@ const personalProjects: PersonalProject[] = [
       { name: "JavaScript", icon: SiJavascript },
       { name: "Node.js", icon: SiNodedotjs },
     ],
+    imageUrl: "/projects/Focus Flow.png",
   },
   {
     title: "Kitchen Sync",
     description: "Digital food pantry with auto recipe generator",
     technologies: [{ name: "Java", icon: SiOracle }],
-    },
+    imageUrl: "/projects/Kitchen Sync.png",
+  },
 ];
 
 export default function Projects() {
@@ -45,14 +47,14 @@ export default function Projects() {
             className="group relative flex flex-col overflow-hidden rounded-xl bg-gray-50 dark:bg-[#111111] border border-gray-300 dark:border-neutral-600 hover:border-gray-400 dark:hover:border-neutral-500 transition-all duration-300 hover:-translate-y-2 project-card"
           >
             {/* Image Area - taking up top portion */}
-            <div className="aspect-[4/3] w-full bg-gray-200 dark:bg-gray-700 relative overflow-hidden">
+            <div className={`aspect-[4/3] w-full relative overflow-hidden flex ${project.title === 'Focus Flow' ? 'items-start pt-8 bg-[#2a2a2a] dark:bg-[#2a2a2a]' : 'bg-gray-200 dark:bg-gray-700'}`}>
               {project.imageUrl ? (
                 <>
                   <Image
                     src={project.imageUrl}
                     alt={`${project.title} screenshot`}
                     fill
-                    className="object-cover"
+                    className={project.title === 'Focus Flow' ? 'object-contain object-top' : 'object-cover'}
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   {/* Overlay gradient */}

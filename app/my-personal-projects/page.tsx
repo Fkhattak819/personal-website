@@ -24,12 +24,14 @@ const personalProjects: PersonalProject[] = [
       { name: "JavaScript", icon: SiJavascript },
       { name: "Node.js", icon: SiNodedotjs },
     ],
+    imageUrl: "/projects/Focus Flow.png",
   },
   {
     id: "kitchen-sync",
     title: "Kitchen Sync",
     description: "Digital food pantry with auto recipe generator",
     technologies: [{ name: "Java", icon: SiOracle }],
+    imageUrl: "/projects/Kitchen Sync.png",
   },
 ];
 
@@ -52,7 +54,7 @@ export default function MyPersonalProjectsPage() {
                 className="group block"
               >
                 <div className="flex flex-col rounded-lg bg-gray-50 dark:bg-[#1a1a1a] border border-gray-300 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-700 transition-all duration-300 overflow-hidden">
-                  <div className="w-full h-80 bg-gray-200 dark:bg-gray-800 flex items-center justify-center overflow-hidden relative">
+                  <div className={`w-full h-80 flex ${project.id === 'focus-flow' ? 'items-start pt-8' : 'items-center justify-center'} overflow-hidden relative ${project.id === 'focus-flow' ? 'bg-[#2a2a2a] dark:bg-[#2a2a2a]' : 'bg-gray-200 dark:bg-gray-800'}`}>
                     {project.imageUrl ? (
                       <>
                         <Image
@@ -60,7 +62,7 @@ export default function MyPersonalProjectsPage() {
                           alt={project.title}
                           width={800}
                           height={320}
-                          className="w-full h-full object-cover"
+                          className={`w-full h-full ${project.id === 'focus-flow' ? 'object-contain' : 'object-cover'}`}
                         />
                         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%)' }}></div>
                       </>
