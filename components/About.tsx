@@ -22,7 +22,7 @@ export default function About() {
             <span className="text-sm">Lafayette, Louisiana</span>
           </div>
           <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
-            Aspiring software engineer passionate about building innovative solutions and creating engaging game experiences.
+            Incoming software engineering intern at JP Morgan Chase. Aspiring software engineer passionate about building innovative solutions and creating engaging game experiences.
           </p>
         </div>
         <div className="flex gap-4">
