@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/contexts/ThemeContext";
-import { SiEpicgames, SiShell } from "react-icons/si";
+import { SiEpicgames, SiShell, SiJpmorganchase } from "react-icons/si";
 import { FiBriefcase } from "react-icons/fi";
 import Image from "next/image";
 
@@ -16,6 +16,14 @@ interface ExperienceItem {
 }
 
 const experiences: ExperienceItem[] = [
+  {
+    company: "JPMorgan Chase",
+    role: "Incoming Software Engineer",
+    period: "Jun 2026 - Aug 2026",
+    description: "",
+    logo: SiJpmorganchase,
+    website: "https://www.jpmorganchase.com/",
+  },
   {
     company: "Northrop Grumman",
     role: "Software Engineer Intern",
