@@ -16,7 +16,7 @@ export const SOCIALS = [
 ];
 
 export const STATS = [
-  { value: 10, prefix: "", suffix: "M+", label: "Plays across the Fortnite maps I've built" },
+  { value: 10, prefix: "", suffix: "M+", label: "Plays across Fortnite maps I've built or contributed to" },
   { value: 250, prefix: "$", suffix: "K", label: "Revenue generated as a Fortnite creator" },
   { value: 430, prefix: "", suffix: "%", label: "Longer max simulation runtime at Northrop Grumman" },
   { value: 85, prefix: "", suffix: "%", label: "Classification accuracy on a vision model at Shell" },
@@ -183,14 +183,26 @@ export interface GameMap {
   peakPlayers: number;
 }
 
+// Maps I made, most played first.
 export const GAME_MAPS: GameMap[] = [
-  { title: "Goofy Boxfights", thumbnail: "Goofy Boxfight.jpeg", created: "Aug 2024", plays: 20_000_000, peakPlayers: 60_000 },
   { title: "Choose Your Hero Box PVP", thumbnail: "Choose Your Hero Box PVP.png", created: "Mar 2024", plays: 1_100_000, peakPlayers: 1_200 },
   { title: "Ultimate Goofy BoxFights", thumbnail: "Ultimate Goofy BoxFights.png", created: "Dec 2024", plays: 800_000, peakPlayers: 2_700 },
   { title: "Heroes Tilted", thumbnail: "HeroesTilted.png", created: "May 2024", plays: 359_000, peakPlayers: 400 },
   { title: "Medallion Free For All", thumbnail: "Medallion Free For All.png", created: "Apr 2024", plays: 300_000, peakPlayers: 9_800 },
   { title: "Brainrot 1v1v1 Reload", thumbnail: "Brainrot 1v1v1 Reload.png", created: "Oct 2025", plays: 10_000, peakPlayers: 500 },
   { title: "Greasy One Shot", thumbnail: "Greasy One Shot.png", created: "Jun 2023", plays: 2_400, peakPlayers: 220 },
+];
+
+// Other creators' maps I worked on. These are not mine; the numbers are the map's.
+export const MAP_CONTRIBUTIONS: (GameMap & { contribution: string })[] = [
+  {
+    title: "Goofy Boxfights",
+    thumbnail: "Goofy Boxfight.jpeg",
+    created: "Aug 2024",
+    plays: 20_000_000,
+    peakPlayers: 60_000,
+    contribution: "Another creator's map. I helped develop its backend; I didn't build the map itself.",
+  },
 ];
 
 /** 20000000 -> "20M", 359000 -> "359K", 2400 -> "2.4K", 500 -> "500" */

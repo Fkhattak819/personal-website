@@ -1,12 +1,45 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import type { IconType } from "react-icons";
+import { SiChase, SiEpicgames, SiShell } from "react-icons/si";
+import { FaGraduationCap } from "react-icons/fa6";
 import { AnimatePresence, motion } from "motion/react";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import { EXPERIENCE } from "@/lib/site";
 
 const EASE = [0.2, 0.8, 0.2, 1] as const;
+
+// Company marks, keyed by the company name in lib/site.ts.
+const ICONS: Record<string, IconType> = {
+  "JPMorgan Chase": SiChase,
+  Shell: SiShell,
+  "Epic Games": SiEpicgames,
+  "Louisiana State University": FaGraduationCap,
+};
+const LOGO_IMAGES: Record<string, string> = {
+  "Northrop Grumman": "/logo_no_bg.png",
+};
+
+function CompanyMark({ company }: { company: string }) {
+  const Icon = ICONS[company];
+  const image = LOGO_IMAGES[company];
+  return (
+    <span
+      aria-hidden
+      className="flex h-10 w-10 shrink-0 items-center justify-center border border-ink md:h-12 md:w-12"
+    >
+      {image ? (
+        // The source logo is white; show it black in light mode.
+        <Image src={image} alt="" width={44} height={44} className="h-9 w-9 object-contain brightness-0 dark:brightness-100 md:h-11 md:w-11" />
+      ) : Icon ? (
+        <Icon className="h-5 w-5 md:h-6 md:w-6" />
+      ) : null}
+    </span>
+  );
+}
 
 export default function Experience() {
   // Start with the first role that has details open, so it's clear rows expand.
@@ -26,9 +59,12 @@ export default function Experience() {
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
                   aria-controls={`experience-${i}`}
-                  className="group grid-12 w-full items-baseline gap-y-1 py-5 text-left md:py-6"
+                  className="group grid-12 w-full items-center gap-y-2 py-5 text-left md:py-6"
                 >
-                  <span className="label col-span-1 tabular-nums md:col-span-2">0{i + 1}</span>
+                  <span className="label col-span-3 flex items-center gap-4 tabular-nums md:col-span-2 md:justify-between md:pr-2">
+                    0{i + 1}
+                    <CompanyMark company={exp.company} />
+                  </span>
                   <span className="col-span-4 text-[1.7rem] font-bold leading-none tracking-[-0.035em] transition-transform duration-300 ease-swiss group-hover:translate-x-2 md:col-span-5 md:text-[2.75rem]">
                     {exp.company}
                   </span>
