@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import DetailSection from "@/components/DetailSection";
 import Reveal from "@/components/Reveal";
+import SideChannel from "@/components/SideChannel";
 import { EDUCATION, LEADERSHIP, SITE, SKILLS, SOCIALS } from "@/lib/site";
 
 export const metadata: Metadata = { title: "About" };
@@ -120,6 +121,11 @@ export default function AboutPage() {
               </ul>
             </div>
           </Reveal>
+        </section>
+
+        <section id="off-the-clock" className="grid-12 gap-y-6 border-t border-ink py-8 md:py-12">
+          <h2 className="col-span-4 text-base font-bold md:col-span-3">Off the clock</h2>
+          <SideChannel />
         </section>
       </div>
     </>

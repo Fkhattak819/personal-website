@@ -9,15 +9,16 @@
 
   speed: degrees turned over a full scroll. drift: degrees turned by the cursor.
   auto: degrees per second the ring turns on its own.
+  tone: which palette color the band is drawn in on the hero.
 */
 export const BANDS = [
-  { r: 73, w: 6, start: -90, sweep: 250, speed: 220, drift: 50, auto: 5, label: "1" },
-  { r: 92, w: 12, start: -60, sweep: 200, speed: -160, drift: -40, auto: -3.8, label: "2" },
-  { r: 124, w: 24, start: 10, sweep: 230, speed: 120, drift: 30, auto: 2.8, label: "4" },
-  { r: 178, w: 48, start: -150, sweep: 170, speed: -90, drift: -22, auto: -2, label: "8" },
-  { r: 272, w: 96, start: -40, sweep: 215, speed: 60, drift: 16, auto: 1.4, label: "16" },
-  { r: 442, w: 192, start: 120, sweep: 150, speed: -40, drift: -10, auto: -0.9, label: "32" },
-];
+  { r: 73, w: 6, start: -90, sweep: 250, speed: 220, drift: 50, auto: 5, label: "1", tone: "block" },
+  { r: 92, w: 12, start: -60, sweep: 200, speed: -160, drift: -40, auto: -3.8, label: "2", tone: "accent" },
+  { r: 124, w: 24, start: 10, sweep: 230, speed: 120, drift: 30, auto: 2.8, label: "4", tone: "block" },
+  { r: 178, w: 48, start: -150, sweep: 170, speed: -90, drift: -22, auto: -2, label: "8", tone: "accent" },
+  { r: 272, w: 96, start: -40, sweep: 215, speed: 60, drift: 16, auto: 1.4, label: "16", tone: "block" },
+  { r: 442, w: 192, start: 120, sweep: 150, speed: -40, drift: -10, auto: -0.9, label: "32", tone: "block" },
+] as const;
 
 export type Band = (typeof BANDS)[number];
 

@@ -7,6 +7,8 @@ import { BANDS, bandRotation } from "@/components/ArcField";
 type RGB = [number, number, number];
 
 const BUCKETS = 24;
+// Two color ramps, one per band tone, sorted together.
+const TOTAL_BUCKETS = BUCKETS * 2;
 const LANE_SPACING = 3.4; // in the arc field's own units (its viewBox is 1080 wide)
 const VIEWBOX = 1080;
 const POINTER_RADIUS = 130;
@@ -36,9 +38,9 @@ interface ArcParticlesProps {
 }
 
 /**
- * The arcs, drawn on one canvas: each band as a faint solid stroke with dots
- * combed into concentric lanes streaming around it, tinted from the band color
- * at the tail to the accent at the head. Dots part around the cursor.
+ * The arcs, drawn on one canvas: each band as a solid stroke in the blue or
+ * the orange, with dots combed into concentric lanes streaming around it.
+ * Dots part around the cursor.
  */
 export default function ArcParticles({ anchorRef, progress, pointer, time, className }: ArcParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -59,7 +61,7 @@ export default function ArcParticles({ anchorRef, progress, pointer, time, class
     let visible = true;
     let frame = 0;
     let colors: string[] = [];
-    let bandColor = "rgb(31, 213, 245)";
+    let toneColors = { block: "rgb(31, 213, 245)", accent: "rgb(255, 79, 10)" };
 
     let bandOf = new Uint8Array(0);
     let along = new Float32Array(0);
@@ -69,29 +71,32 @@ export default function ArcParticles({ anchorRef, progress, pointer, time, class
     let ys = new Float32Array(0);
     let bucket = new Uint8Array(0);
     let order = new Uint32Array(0);
-    const counts = new Uint32Array(BUCKETS + 1);
+    const counts = new Uint32Array(TOTAL_BUCKETS + 1);
     const rotations = new Float32Array(BANDS.length);
 
     const readColors = () => {
       const styles = getComputedStyle(document.documentElement);
-      const surface = parseTriple(styles.getPropertyValue("--surface"), [236, 239, 239]);
+      const bg = parseTriple(styles.getPropertyValue("--bg"), [250, 250, 247]);
       const ink = parseTriple(styles.getPropertyValue("--ink"), [12, 12, 14]);
       const accent = parseTriple(styles.getPropertyValue("--accent"), [255, 79, 10]);
-      let band = parseTriple(styles.getPropertyValue("--band"), [31, 213, 245]);
-      // In dark mode the band color is close to the field; use the block color so the dots show.
-      const distance = Math.abs(band[0] - surface[0]) + Math.abs(band[1] - surface[1]) + Math.abs(band[2] - surface[2]);
-      if (distance < 110) band = parseTriple(styles.getPropertyValue("--block"), band);
+      const block = parseTriple(styles.getPropertyValue("--block"), [31, 213, 245]);
+      const css = (c: RGB) => `rgb(${c[0] | 0}, ${c[1] | 0}, ${c[2] | 0})`;
 
-      bandColor = `rgb(${band[0] | 0}, ${band[1] | 0}, ${band[2] | 0})`;
-      const body = mix(band, ink, 0.1);
-      colors = Array.from({ length: BUCKETS }, (_, i) => {
-        const t = (i + 0.5) / BUCKETS;
-        // Band color at the tail, a little ink through the body, the accent at the head.
-        const rgb = t < 0.5 ? mix(band, body, t / 0.5) : mix(body, accent, (t - 0.5) / 0.5);
-        // Fade in at the tail and out at the head, so dots don't pop as they wrap around.
-        const alpha = 0.95 * Math.min(1, t / 0.08) * Math.min(1, (1 - t) / 0.08);
-        return `rgba(${rgb[0] | 0}, ${rgb[1] | 0}, ${rgb[2] | 0}, ${alpha.toFixed(3)})`;
-      });
+      // The bands themselves: solid blue or solid orange.
+      toneColors = { block: css(block), accent: css(accent) };
+
+      // Dots riding on a band: paper at the tail, ink through the body, and the
+      // other band color at the head, so each ring carries a little of both.
+      const ramp = (head: RGB) =>
+        Array.from({ length: BUCKETS }, (_, i) => {
+          const t = (i + 0.5) / BUCKETS;
+          const body = mix(bg, ink, 0.6);
+          const rgb = t < 0.5 ? mix(bg, body, t / 0.5) : mix(body, head, (t - 0.5) / 0.5);
+          // Fade in at the tail and out at the head, so dots don't pop as they wrap around.
+          const alpha = 0.95 * Math.min(1, t / 0.08) * Math.min(1, (1 - t) / 0.08);
+          return `rgba(${rgb[0] | 0}, ${rgb[1] | 0}, ${rgb[2] | 0}, ${alpha.toFixed(3)})`;
+        });
+      colors = [...ramp(accent), ...ramp(block)];
     };
 
     const build = () => {
@@ -161,18 +166,16 @@ export default function ArcParticles({ anchorRef, progress, pointer, time, class
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
-      // Faint solid bands underneath, so the shapes stay crisp.
-      ctx.globalAlpha = 0.3;
-      ctx.strokeStyle = bandColor;
+      // Solid bands underneath: the blue on most rings, the orange on a couple.
       for (let k = 0; k < BANDS.length; k++) {
         const band = BANDS[k];
         rotations[k] = bandRotation(band, p, m, now);
+        ctx.strokeStyle = toneColors[band.tone];
         ctx.lineWidth = band.w * scale;
         ctx.beginPath();
         ctx.arc(cx, cy, band.r * scale, rotations[k] * DEG, (rotations[k] + band.sweep * intro) * DEG);
         ctx.stroke();
       }
-      ctx.globalAlpha = 1;
 
       counts.fill(0);
       for (let i = 0; i < count; i++) {
@@ -209,14 +212,15 @@ export default function ArcParticles({ anchorRef, progress, pointer, time, class
         ys[i] = py;
         // Head and tail swap for bands that turn the other way, so the accent always leads.
         const t = band.auto > 0 ? a : 1 - a;
-        const b = Math.min(BUCKETS - 1, (t * BUCKETS) | 0);
+        // Blue bands use the first ramp (orange head), orange bands the second (blue head).
+        const b = (band.tone === "block" ? 0 : BUCKETS) + Math.min(BUCKETS - 1, (t * BUCKETS) | 0);
         bucket[i] = b;
         counts[b + 1]++;
       }
 
       // Counting sort by color bucket: one fillStyle change per bucket instead of per dot.
-      for (let b = 0; b < BUCKETS; b++) counts[b + 1] += counts[b];
-      const drawn = counts[BUCKETS];
+      for (let b = 0; b < TOTAL_BUCKETS; b++) counts[b + 1] += counts[b];
+      const drawn = counts[TOTAL_BUCKETS];
       for (let i = 0; i < count; i++) {
         if (bucket[i] !== 255) order[counts[bucket[i]]++] = i;
       }
