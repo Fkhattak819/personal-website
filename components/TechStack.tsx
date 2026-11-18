@@ -1,134 +1,77 @@
+"use client";
+
+import { useRef } from "react";
 import {
-  SiAmazonwebservices,
-  SiKubernetes,
-  SiNodedotjs,
-  SiReact,
-  SiPostgresql,
-  SiNumpy,
-  SiTensorflow,
-  SiPandas,
-  SiQt,
-  SiGit,
-  SiJest,
-  SiPytest,
-  SiJira,
-  SiLinux,
-  SiUnrealengine,
-  SiPython,
-  SiGnubash,
-  SiMysql,
-  SiC,
-  SiCplusplus,
-  SiOracle,
-  SiHtml5,
-  SiCss3,
-  SiJavascript,
-  SiTypescript,
-  SiYaml,
-} from "react-icons/si";
-import { FiDatabase, FiUsers, FiCode } from "react-icons/fi";
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "motion/react";
+import SectionHeading from "@/components/SectionHeading";
+import { LANGUAGES, TECHNOLOGIES } from "@/lib/site";
 
-const programmingLanguages = [
-  { name: "Python", icon: SiPython },
-  { name: "Verse", icon: FiCode }, // Using FiCode as generic placeholder for Verse as specific icon might not be available
-  { name: "Bash", icon: SiGnubash },
-  { name: "SQL", icon: SiMysql }, // Using MySQL icon for generic SQL
-  { name: "C", icon: SiC },
-  { name: "C++", icon: SiCplusplus },
-  { name: "Java", icon: SiOracle },
-  { name: "HTML", icon: SiHtml5 },
-  { name: "CSS", icon: SiCss3 },
-  { name: "JavaScript", icon: SiJavascript },
-  { name: "TypeScript", icon: SiTypescript },
-  { name: "YAML", icon: SiYaml },
-];
+const wrap = (min: number, max: number, v: number) => {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
+};
 
-const technologies = [
-  { name: "AWS", icon: SiAmazonwebservices },
-  { name: "Kubernetes", icon: SiKubernetes },
-  { name: "Node.js", icon: SiNodedotjs },
-  { name: "React", icon: SiReact },
-  { name: "ChromaDB", icon: FiDatabase },
-  { name: "PostgreSQL", icon: SiPostgresql },
-  { name: "NumPy", icon: SiNumpy },
-  { name: "TensorFlow", icon: SiTensorflow },
-  { name: "Unsloth", icon: SiPython },
-  { name: "Pandas", icon: SiPandas },
-  { name: "QT", icon: SiQt },
-  { name: "Git", icon: SiGit },
-  { name: "Jest", icon: SiJest },
-  { name: "Pytest", icon: SiPytest },
-  { name: "Jira", icon: SiJira },
-  { name: "Agile", icon: FiUsers },
-  { name: "Linux", icon: SiLinux },
-  { name: "Unreal Engine 5", icon: SiUnrealengine },
-];
+/** A marquee that drifts on its own and speeds up / reverses with the scroll. */
+function MarqueeRow({ items, baseVelocity, outline }: { items: string[]; baseVelocity: number; outline?: boolean }) {
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, { damping: 50, stiffness: 400 });
+  const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 4], { clamp: false });
+  const reduceMotion = useReducedMotion();
+  const direction = useRef(1);
+
+  // Two copies sit side by side, so wrapping between -50% and 0% loops seamlessly.
+  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+
+  useAnimationFrame((_, delta) => {
+    if (reduceMotion) return;
+    const factor = velocityFactor.get();
+    if (factor < 0) direction.current = -1;
+    else if (factor > 0) direction.current = 1;
+    let moveBy = direction.current * baseVelocity * (Math.min(delta, 64) / 1000);
+    moveBy += direction.current * moveBy * factor;
+    baseX.set(baseX.get() + moveBy);
+  });
+
+  return (
+    <div className="overflow-hidden">
+      <motion.div style={{ x }} className="flex w-max whitespace-nowrap will-change-transform">
+        {[0, 1].map((copy) => (
+          <ul key={copy} aria-hidden={copy === 1} className="flex shrink-0 items-center">
+            {items.map((item) => (
+              <li
+                key={item}
+                className={`flex items-center text-[3.25rem] font-bold leading-[1.1] tracking-[-0.04em] md:text-[6.5rem] ${
+                  outline ? "outline-text" : ""
+                }`}
+              >
+                {item}
+                <span aria-hidden className="mx-5 inline-block h-3 w-3 bg-ink [-webkit-text-stroke:0] md:mx-8 md:h-5 md:w-5" />
+              </li>
+            ))}
+          </ul>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
 
 export default function TechStack() {
   return (
-    <section id="languages-and-technologies" className="mb-12 overflow-hidden">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Languages and Technologies</h2>
-      
-      <div className="relative w-full">
-        {/* Gradient masks for smooth fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10"></div>
-
-        <div className="flex w-max animate-scroll hover:[animation-play-state:paused] mb-6" style={{ willChange: 'transform' }}>
-          {/* First copy of the list */}
-          <div className="flex gap-6 mx-4">
-            {programmingLanguages.map((tech) => {
-              const Icon = tech.icon;
-              return (
-                <div key={tech.name} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Second copy for seamless looping */}
-          <div className="flex gap-6 mx-4">
-            {programmingLanguages.map((tech) => {
-              const Icon = tech.icon;
-              return (
-                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="flex w-max animate-scroll hover:[animation-play-state:paused]" style={{ animationDirection: 'reverse', willChange: 'transform' }}>
-          {/* First copy of the list */}
-          <div className="flex gap-6 mx-4">
-            {technologies.map((tech) => {
-              const Icon = tech.icon;
-              return (
-                <div key={tech.name} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Second copy for seamless looping */}
-          <div className="flex gap-6 mx-4">
-            {technologies.map((tech) => {
-              const Icon = tech.icon;
-              return (
-                <div key={`${tech.name}-duplicate`} className="flex items-center gap-2 text-gray-900 dark:text-gray-200 hover:text-gray-700 dark:hover:text-white transition-colors">
-                  <Icon className="w-6 h-6 text-gray-900 dark:text-gray-200" />
-                  <span className="text-lg font-medium text-gray-900 dark:text-gray-200">{tech.name}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+    <section id="languages-and-technologies" className="pt-20 md:pt-32">
+      <SectionHeading index="01" title="Languages & technologies" />
+      <div className="space-y-1 md:space-y-2">
+        <MarqueeRow items={LANGUAGES} baseVelocity={-1.6} />
+        <MarqueeRow items={TECHNOLOGIES} baseVelocity={1.2} outline />
       </div>
     </section>
   );

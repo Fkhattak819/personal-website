@@ -1,86 +1,24 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import Link from "next/link";
-import Image from "next/image";
-import { SiUnrealengine } from "react-icons/si";
-import { FiArrowRight } from "react-icons/fi";
+import type { Metadata } from "next";
+import PageHeader from "@/components/PageHeader";
+import ProjectCard from "@/components/ProjectCard";
+import Reveal from "@/components/Reveal";
+import { WORK } from "@/lib/site";
 
-interface WorkItem {
-  id: string;
-  title: string;
-  description: string;
-  technologies: { name: string; icon: any }[];
-  employmentType: string;
-  imageUrl?: string;
-}
-
-const workItems: WorkItem[] = [
-  {
-    id: "game-developer",
-    title: "Game Developer",
-    description: "Creating interactive Fortnite maps and game experiences.",
-    technologies: [
-      { name: "Unreal Engine 5", icon: SiUnrealengine },
-    ],
-    employmentType: "Self Employed",
-    imageUrl: "/Thumnails/fortnite-main.jpg",
-  },
-];
+export const metadata: Metadata = { title: "Work" };
 
 export default function MyWorkPage() {
   return (
-    <main className="min-h-screen">
-      <Navigation />
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-12">
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 animate-slide-in-left">Work Collection</p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 text-gray-900 dark:text-white animate-slide-in-right" style={{ animationDelay: '0.05s' }}>My Work</h1>
-        </div>
-
-        <div className="space-y-8">
-          {workItems.map((work) => {
-            const TechIcon = work.technologies[0]?.icon;
-            return (
-              <Link
-                key={work.id}
-                href={`/my-work/${work.id}`}
-                className="group block"
-              >
-                <div className="flex flex-col rounded-lg bg-gray-50 dark:bg-[#1a1a1a] border border-gray-300 dark:border-gray-800 hover:border-gray-400 dark:hover:border-gray-700 transition-all duration-300 overflow-hidden">
-                  <div className="w-full h-80 bg-gray-200 dark:bg-gray-800 flex items-center justify-center overflow-hidden relative">
-                    {work.imageUrl ? (
-                      <>
-                        <Image
-                          src={work.imageUrl}
-                          alt={work.title}
-                          width={800}
-                          height={320}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" style={{ background: 'radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(0, 0, 0, 0.3) 100%)' }}></div>
-                      </>
-                    ) : (
-                      <div className="text-gray-400 dark:text-gray-500 text-sm">Image Placeholder</div>
-                    )}
-                  </div>
-                  <div className="p-4 flex flex-col">
-                    <h2 className="text-xl font-bold mb-1 text-gray-900 dark:text-white">
-                      {work.title}
-                    </h2>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{work.employmentType}</p>
-                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
-                      Learn more
-                      <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+    <>
+      <PageHeader eyebrow="Work collection" title="My Work" />
+      <div className="container-page mt-12 md:mt-20 pb-24 md:pb-40">
+        <div className="grid grid-cols-1 gap-x-6 gap-y-14 border-t border-ink pt-8 md:grid-cols-2">
+          {WORK.map((project, i) => (
+            <Reveal key={project.slug} delay={i * 0.1}>
+              <ProjectCard project={project} index={i} />
+            </Reveal>
+          ))}
         </div>
       </div>
-      <Footer />
-    </main>
+    </>
   );
 }
-

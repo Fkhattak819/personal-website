@@ -1,148 +1,88 @@
 "use client";
 
-import { useTheme } from "@/contexts/ThemeContext";
-import { SiEpicgames, SiShell, SiJpmorganchase } from "react-icons/si";
-import { FiBriefcase } from "react-icons/fi";
-import Image from "next/image";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import SectionHeading from "@/components/SectionHeading";
+import Reveal from "@/components/Reveal";
+import { EXPERIENCE } from "@/lib/site";
 
-interface ExperienceItem {
-  company: string;
-  role: string;
-  period: string;
-  description: string;
-  logo?: any;
-  logoImage?: string;
-  website?: string;
-}
-
-const experiences: ExperienceItem[] = [
-  {
-    company: "JPMorgan Chase",
-    role: "Incoming Software Engineer",
-    period: "Jun 2026 - Aug 2026",
-    description: "",
-    logo: SiJpmorganchase,
-    website: "https://www.jpmorganchase.com/",
-  },
-  {
-    company: "Northrop Grumman",
-    role: "Software Engineer Intern",
-    period: "June 2025 - Aug 2025",
-    description: "",
-    logoImage: "/logo_no_bg.png",
-    website: "https://www.northropgrumman.com/",
-  },
-  {
-    company: "Shell",
-    role: "Machine Learning Intern",
-    period: "Jan 2025 - May 2025",
-    description: "",
-    logo: SiShell,
-    website: "https://www.shell.com/",
-  },
-  {
-    company: "Epic Games",
-    role: "Game Developer",
-    period: "Jun 2023 - Present",
-    description: "",
-    logo: SiEpicgames,
-    website: "https://www.epicgames.com/",
-  },
-  {
-    company: "Louisiana State University",
-    role: "Undergraduate Researcher",
-    period: "Sep 2024 - Present",
-    description: "",
-    logo: FiBriefcase,
-    website: "https://www.lsu.edu/",
-  },
-];
+const EASE = [0.2, 0.8, 0.2, 1] as const;
 
 export default function Experience() {
-  const { themeColors, themeColor, themeMode } = useTheme();
-  const currentTheme = themeColors[themeColor];
-
-  // Get solid colors and glow colors based on theme
-  const getDotColors = () => {
-    const colorMap: Record<string, { solid: string; rgb: string }> = {
-      purple: { solid: '#a855f7', rgb: '168,85,247' },
-      green: { solid: '#22c55e', rgb: '34,197,94' },
-      blue: { solid: '#3b82f6', rgb: '59,130,246' },
-      red: { solid: '#ef4444', rgb: '239,68,68' },
-      yellow: { solid: '#eab308', rgb: '234,179,8' },
-    };
-    return colorMap[themeColor] || colorMap.purple;
-  };
-
-  const colors = getDotColors();
-  const glowShadow = `0 0 4px rgba(${colors.rgb},0.3), 0 0 8px rgba(${colors.rgb},0.2)`;
+  // Start with the first role that has details open, so it's clear rows expand.
+  const [open, setOpen] = useState<number | null>(EXPERIENCE.findIndex((e) => e.points.length > 0));
 
   return (
-    <section id="experience" className="mb-12">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-900 dark:text-white">Experience</h2>
-      <div className="relative">
-        {/* Timeline line */}
-        <div 
-          className="absolute left-4 top-0 bottom-0 w-0.5 animate-timeline-grow" 
-          style={{ backgroundColor: themeMode === 'light' ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)' }}
-        ></div>
-        
-        <div className="space-y-4">
-          {experiences.map((exp, index) => {
-            const LogoIcon = exp.logo;
+    <section id="experience" className="pt-20 md:pt-32">
+      <SectionHeading index="02" title="Experience" />
+      <div className="container-page">
+        <ul className="border-t border-ink">
+          {EXPERIENCE.map((exp, i) => {
+            const isOpen = open === i;
             return (
-              <div key={index} className="relative pl-12">
-                {/* Timeline dot */}
-                <div 
-                  className="absolute left-[11px] top-2 w-3 h-3 rounded-full z-10 border-2 border-gray-900 dark:border-white animate-dot-appear"
-                  style={{ 
-                    backgroundColor: colors.solid,
-                    boxShadow: glowShadow,
-                    animationDelay: `${0.3 + index * 0.2}s`
-                  }}
-                ></div>
-                
-                <div className="flex items-start gap-4">
-                  {/* Company Logo */}
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-gray-50 dark:bg-white/5 border-2 border-gray-400 dark:border-neutral-700 flex items-center justify-center overflow-hidden">
-                    {exp.logoImage ? (
-                      <Image
-                        src={exp.logoImage}
-                        alt={`${exp.company} logo`}
-                        width={40}
-                        height={40}
-                        className="object-contain grayscale-logo"
-                      />
-                    ) : LogoIcon ? (
-                      <LogoIcon 
-                        className="w-6 h-6 text-gray-900 dark:text-white" 
-                      />
-                    ) : null}
-                  </div>
-                  
-                  <div className="flex-1">
-                    {exp.website ? (
-                      <a
-                        href={exp.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-lg font-semibold mb-1 block hover:opacity-80 transition-opacity text-gray-900 dark:text-white"
-                      >
-                        {exp.company}
-                      </a>
-                    ) : (
-                      <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">{exp.company}</h3>
-                    )}
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{exp.role}</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-500">{exp.period}</p>
-                  </div>
-                </div>
-              </div>
+              <Reveal as="li" key={exp.company} delay={i * 0.05} className="border-b border-ink">
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={`experience-${i}`}
+                  className="group grid-12 w-full items-baseline gap-y-1 py-5 text-left md:py-6"
+                >
+                  <span className="label col-span-1 tabular-nums md:col-span-2">0{i + 1}</span>
+                  <span className="col-span-4 text-[1.7rem] font-bold leading-none tracking-[-0.035em] transition-transform duration-300 ease-swiss group-hover:translate-x-2 md:col-span-5 md:text-[2.75rem]">
+                    {exp.company}
+                  </span>
+                  <span className="label col-span-4 md:col-span-2">{exp.role}</span>
+                  <span className="label col-span-4 tabular-nums text-ink/70 md:col-span-2">
+                    {exp.period}
+                  </span>
+                  <span
+                    aria-hidden
+                    className={`relative col-start-4 row-start-1 h-4 w-4 justify-self-end self-center transition-transform duration-300 ease-swiss md:col-span-1 md:col-start-12 ${
+                      isOpen ? "rotate-45 text-accent" : ""
+                    }`}
+                  >
+                    <span className="absolute left-0 top-1/2 h-0.5 w-full -translate-y-1/2 bg-current" />
+                    <span className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-current" />
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`experience-${i}`}
+                      className="overflow-hidden"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: EASE }}
+                    >
+                      <div className="grid-12 gap-y-4 pb-8 pt-1">
+                        <div className="label col-span-4 md:col-span-3 md:col-start-3">
+                          <p>{exp.location}</p>
+                          <a href={exp.website} target="_blank" rel="noopener noreferrer" className="mt-1 inline-block font-medium">
+                            <span className="link-u">Company site</span> ↗
+                          </a>
+                        </div>
+                        {exp.points.length > 0 && (
+                          <ul className="col-span-4 space-y-3 text-base leading-[1.45] md:col-span-5 md:col-start-8">
+                            {exp.points.map((point) => (
+                              <li key={point} className="flex gap-3">
+                                <span aria-hidden className="mt-[0.55em] h-1.5 w-1.5 shrink-0 bg-ink" />
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Reveal>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );
 }
-

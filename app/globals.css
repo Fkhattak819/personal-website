@@ -2,276 +2,192 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Lemon Milk';
-  src: url('/fonts/LemonMilk-Regular.otf') format('opentype'),
-       url('/fonts/LemonMilk-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Lemon Milk';
-  src: url('/fonts/LemonMilk-Bold.otf') format('opentype'),
-       url('/fonts/LemonMilk-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
+/*
+  White / Cyan / Orange: two quiet colors and one loud one.
+  --bg and --block are the quiet pair (page and tonal blocks), --accent is the
+  loud color and is reserved for the few things that should be noticed first.
+  --ink is the text color; --band and --line color the hero arcs and their
+  construction lines.
+*/
 :root {
-  --background: #111111;
-  --foreground: #ffffff;
-  --theme-color: 168, 85, 247; /* Purple default */
-  --theme-shadow: rgba(168, 85, 247, 0.1);
-  --theme-glow: rgba(168, 85, 247, 0.6);
+  --bg: 250 250 247;
+  --surface: 236 239 239;
+  --ink: 12 12 14;
+  --block: 31 213 245;
+  --block-ink: 12 12 14;
+  --accent: 255 79 10;
+  --accent-ink: 12 12 14;
+  --band: var(--block);
+  --line: var(--accent);
+  color-scheme: light;
 }
 
+/* Dark mode keeps the block and accent, and darkens the page. */
 html.dark {
-  --background: #111111;
-  --foreground: #ffffff;
+  --bg: 12 13 14;
+  --surface: 26 28 29;
+  --ink: 245 247 247;
+  --band: 44 48 50;
+  --line: var(--accent);
+  color-scheme: dark;
 }
 
-html.light {
-  --background: #ffffff;
-  --foreground: #111111;
+/* A tonal block: swaps the page colors for the second quiet color. */
+.inverse {
+  --bg: var(--block);
+  --ink: var(--block-ink);
+  --surface: var(--block);
+  background-color: rgb(var(--bg));
+  color: rgb(var(--ink));
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Lemon Milk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 4.5rem;
+  }
 
-@layer utilities {
-  .text-balance {
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--accent-ink));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
     text-wrap: balance;
   }
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
+@layer components {
+  /* The grid: 4 columns on small screens, 12 from md up. */
+  .container-page {
+    @apply mx-auto w-full max-w-[1440px] px-4 md:px-8;
   }
-  100% {
-    transform: translateX(-50%);
+
+  .grid-12 {
+    @apply grid grid-cols-4 gap-x-4 md:grid-cols-12 md:gap-x-6;
   }
-}
 
-.animate-scroll {
-  animation: scroll 60s linear infinite;
-  will-change: transform; /* Optimize for GPU acceleration */
-}
-
-@keyframes wave {
-  0%, 100% {
-    transform: rotate(0deg);
+  .label {
+    @apply text-[13px] leading-snug;
   }
-  25% {
-    transform: rotate(20deg);
+
+  .display {
+    @apply font-bold leading-[0.86] tracking-[-0.045em];
   }
-  75% {
-    transform: rotate(-20deg);
+
+  .btn {
+    @apply inline-flex items-center gap-3 px-5 py-3 text-sm font-medium transition-colors duration-200;
   }
-}
 
-.animate-wave {
-  display: inline-block;
-  animation: wave 3s ease-in-out infinite;
-  transform-origin: 70% 70%;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-@keyframes timelineGrow {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
+  .btn-accent {
+    @apply bg-accent text-accent-ink hover:bg-ink hover:text-bg;
   }
-  100% {
-    transform: scaleY(1);
-    transform-origin: top;
+
+  .btn-outline {
+    @apply border border-ink hover:bg-ink hover:text-bg;
   }
-}
 
-.animate-timeline-grow {
-  animation: timelineGrow 1s ease-out forwards;
-  transform-origin: top;
-}
-
-@keyframes dotAppear {
-  0% {
-    opacity: 0;
-    transform: scale(0);
+  .tag {
+    @apply inline-flex items-center border border-current px-2.5 py-1 text-xs font-medium;
   }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+
+  /* Underline that draws in from the left on hover. */
+  .link-u {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-}
 
-.animate-dot-appear {
-  animation: dotAppear 0.5s ease-out forwards;
-  opacity: 0;
-}
-
-.grayscale-logo {
-  filter: grayscale(100%) brightness(0.9);
-  will-change: filter;
-}
-
-html.light .grayscale-logo {
-  filter: brightness(0) contrast(1);
-}
-
-.project-card {
-  box-shadow: 0 0 0 transparent;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.project-card:hover {
-  box-shadow: 0 20px 25px -5px var(--theme-shadow), 0 8px 10px -6px var(--theme-shadow);
-}
-
-/* Light mode specific styles */
-html.light .bg-background {
-  background-color: #ffffff;
-}
-
-html.light .text-white {
-  color: #111111;
-}
-
-/* Ensure text is visible in light mode */
-html.light body {
-  color: #111111;
-}
-
-html.light h1,
-html.light h2,
-html.light h3,
-html.light h4,
-html.light h5,
-html.light h6 {
-  color: #111111;
-}
-
-html.light .text-gray-900,
-html.light span.text-gray-900 {
-  color: #111111 !important;
-}
-
-html.light .text-gray-300,
-html.light .text-gray-400 {
-  color: #4b5563;
-}
-
-html.light .text-gray-500 {
-  color: #6b7280;
-}
-
-html.light .text-gray-600 {
-  color: #4b5563;
-}
-
-html.light .text-gray-700 {
-  color: #374151;
-}
-
-html.light .border-gray-600,
-html.light .border-gray-800,
-html.light .border-neutral-600,
-html.light .border-neutral-700,
-html.light .border-neutral-800 {
-  border-color: #e5e7eb;
-}
-
-html.light [class*="bg-[#111111]"] {
-  background-color: #f9fafb;
-}
-
-html.light .bg-neutral-800 {
-  background-color: #f3f4f6;
-}
-
-html.light [class*="bg-white/5"] {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-html.light [class*="hover:bg-gray-800"]:hover {
-  background-color: #f3f4f6;
-}
-
-@keyframes panRightToLeft {
-  0% {
-    transform: translateX(0);
+  .link-u:hover,
+  .link-u:focus-visible {
+    background-size: 100% 1px;
   }
-  100% {
-    transform: translateX(-50%);
+
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgb(var(--ink));
+  }
+
+  /* Long-form copy on the detail pages. */
+  .prose-swiss {
+    @apply max-w-[62ch] text-lg leading-[1.45];
+  }
+
+  .prose-swiss > * + * {
+    @apply mt-5;
+  }
+
+  .prose-swiss h3 {
+    @apply mt-8 text-base font-bold;
+  }
+
+  .prose-swiss ul {
+    @apply border-t border-ink/25;
+  }
+
+  .prose-swiss li {
+    @apply border-b border-ink/25 py-3 text-base;
+  }
+
+  .prose-swiss strong {
+    @apply font-bold;
   }
 }
 
-.animate-pan {
-  animation: panRightToLeft 60s linear infinite;
-  will-change: transform;
+/* Hover-only extras (floating previews) vs. their touch fallbacks. */
+.hover-only {
+  display: none;
 }
 
-.pan-container:hover .animate-pan {
-  animation-play-state: paused;
-}
-
-.thumbnail-item {
-  transition: transform 0.3s ease, margin 0.3s ease;
-  position: relative;
-}
-
-.thumbnail-item:hover {
-  transform: scale(1.3);
-  z-index: 10;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  position: relative;
-}
-
-.thumbnail-item:hover + .thumbnail-item {
-  margin-left: 1rem;
-}
-
-.pan-container:hover .thumbnail-item:not(:hover) {
-  opacity: 0.6;
-}
-
-@keyframes slideInFromLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-30px);
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .hover-only {
+    display: block;
   }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
+
+  .touch-only {
+    display: none;
   }
 }
 
-@keyframes slideInFromRight {
-  0% {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* Lenis smooth scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-.animate-slide-in-left {
-  animation: slideInFromLeft 0.3s ease-out forwards;
-  opacity: 0;
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
 }
 
-.animate-slide-in-right {
-  animation: slideInFromRight 0.3s ease-out forwards;
-  opacity: 0;
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

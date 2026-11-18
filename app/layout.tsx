@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
+import { Inter_Tight } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import Providers from "@/components/Providers";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
+import ScrollProgress from "@/components/ScrollProgress";
+import GridOverlay from "@/components/GridOverlay";
+
+// Web fallback for visitors without Helvetica Neue installed.
+const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Personal Website",
-  description: "Full-Stack Web Developer Portfolio",
+  title: {
+    default: "Fahd Khattak — Software Engineer & Game Developer",
+    template: "%s — Fahd Khattak",
+  },
+  description:
+    "Portfolio of Fahd Khattak, a software engineer and game developer studying Computer Science at LSU. Internships at JPMorgan Chase, Northrop Grumman, and Shell; Fortnite and Roblox games.",
 };
+
+// Runs before paint so the saved theme never flashes.
+const themeScript = `(function(){try{var m=localStorage.getItem('themeMode');if(m!=='dark'&&m!=='light'){m='light';}var r=document.documentElement;r.classList.remove('light','dark');r.classList.add(m);}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -13,39 +29,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-background dark">
-      <body className="antialiased bg-background relative" style={{ color: 'var(--foreground)' }}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('themeColor') || 'purple';
-                  const themeMode = localStorage.getItem('themeMode') || 'dark';
-                  const colorMap = {
-                    purple: { rgb: "168, 85, 247", shadow: "rgba(168, 85, 247, 0.1)", glow: "rgba(168, 85, 247, 0.8)" },
-                    green: { rgb: "34, 197, 94", shadow: "rgba(34, 197, 94, 0.1)", glow: "rgba(34, 197, 94, 0.8)" },
-                    blue: { rgb: "59, 130, 246", shadow: "rgba(59, 130, 246, 0.1)", glow: "rgba(59, 130, 246, 0.8)" },
-                    red: { rgb: "239, 68, 68", shadow: "rgba(239, 68, 68, 0.1)", glow: "rgba(239, 68, 68, 0.8)" },
-                    yellow: { rgb: "234, 179, 8", shadow: "rgba(234, 179, 8, 0.1)", glow: "rgba(234, 179, 8, 0.8)" }
-                  };
-                  const colors = colorMap[theme] || colorMap.purple;
-                  const root = document.documentElement;
-                  root.style.setProperty('--theme-color', colors.rgb);
-                  root.style.setProperty('--theme-shadow', colors.shadow);
-                  root.style.setProperty('--theme-glow', colors.glow);
-                  root.classList.remove('light', 'dark');
-                  root.classList.add(themeMode === 'light' ? 'light' : 'dark');
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-        <ThemeProvider>
-          <div className="relative z-10">{children}</div>
-        </ThemeProvider>
+    <html lang="en" className={`${sans.variable} light`} suppressHydrationWarning>
+      <body id="top">
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Without JavaScript, show everything that would otherwise animate in. */}
+        <noscript>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+        <Providers>
+          <SmoothScroll />
+          <ScrollProgress />
+          <GridOverlay />
+          <Navigation />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
 }
-
