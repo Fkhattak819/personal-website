@@ -17,7 +17,7 @@ export const SOCIALS = [
 
 export const STATS = [
   { value: 10, prefix: "", suffix: "M+", label: "Plays across Fortnite maps I've built or contributed to" },
-  { value: 250, prefix: "$", suffix: "K", label: "Revenue generated as a Fortnite creator" },
+  { value: 100, prefix: "$", suffix: "K", label: "Revenue generated as a Fortnite creator" },
   { value: 430, prefix: "", suffix: "%", label: "Longer max simulation runtime at Northrop Grumman" },
   { value: 85, prefix: "", suffix: "%", label: "Classification accuracy on a vision model at Shell" },
 ];
@@ -81,7 +81,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     website: "https://www.epicgames.com/",
     points: [
       "Build Fortnite maps in Unreal Engine 5 with Verse and C++ as part of a 5-person studio.",
-      "Reached 10M+ total plays, 10K peak concurrent players, and $250K in revenue.",
+      "Reached 10M+ total plays, 10K peak concurrent players, and $100K in revenue.",
       "Sustained 2,000+ concurrent users and lifted retention by 30% through rapid iteration on UI/UX, gameplay systems, and animations.",
     ],
   },

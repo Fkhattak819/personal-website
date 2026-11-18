@@ -145,7 +145,7 @@ export default function GameDeveloperPage() {
             { value: "5", label: "Person studio building maps together" },
             { value: "2K+", label: "Concurrent players sustained" },
             { value: "30%", label: "Retention lift from rapid iteration" },
-            { value: "$250K", label: "Revenue generated" },
+            { value: "$100K", label: "Revenue generated" },
           ].map((stat, i) => (
             <Reveal
               key={stat.label}
