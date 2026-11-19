@@ -110,10 +110,19 @@ export interface Project {
   /** "portrait" screenshots are shown framed rather than cropped. */
   fit?: "cover" | "portrait";
   /** Rendered instead of an image when there is no screenshot yet. */
-  graphic?: "rail" | "blocks";
+  graphic?: "rail" | "blocks" | "voice";
 }
 
 export const WORK: Project[] = [
+  {
+    slug: "smartective",
+    href: "/my-work/smartective",
+    title: "Smartective",
+    kicker: "Startup · Backend engineering",
+    description: "Voice-driven documentation software for field teams. I work on its serverless backend, security and CI.",
+    tags: ["TypeScript", "Node.js", "AWS Lambda", "DynamoDB", "Terraform"],
+    graphic: "voice",
+  },
   {
     slug: "game-developer",
     href: "/my-work/game-developer",

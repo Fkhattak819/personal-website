@@ -94,7 +94,7 @@ export default function RailCarSealDetectionPage() {
           </DetailSection>
         </div>
 
-        <NextProject label="Next project" title="Fortnite Maps" href="/my-work/game-developer" />
+        <NextProject label="Next project" title="Smartective" href="/my-work/smartective" />
       </div>
     </>
   );

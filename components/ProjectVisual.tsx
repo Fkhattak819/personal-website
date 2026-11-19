@@ -60,9 +60,41 @@ export function BlocksGraphic() {
   );
 }
 
+/** Abstract voice-to-form: a waveform on the left becoming a filled-in sheet on the right. */
+export function VoiceGraphic() {
+  const bars = [60, 130, 210, 150, 260, 180, 110, 200, 90];
+  return (
+    <svg
+      viewBox="0 0 800 500"
+      preserveAspectRatio="xMidYMid slice"
+      className="h-full w-full"
+      role="img"
+      aria-label="Abstract illustration of a voice waveform turning into a completed form"
+    >
+      <rect width="800" height="500" fill="rgb(var(--block))" />
+      {bars.map((h, i) => (
+        <rect key={i} x={70 + i * 36} y={250 - h / 2} width="20" height={h} fill="rgb(var(--block-ink))" />
+      ))}
+      <rect x="400" y="246" width="60" height="8" fill="rgb(var(--block-ink))" />
+      <rect x="490" y="90" width="240" height="320" fill="rgb(var(--bg))" stroke="rgb(var(--block-ink))" strokeWidth="8" />
+      {[150, 210, 270, 330].map((y) => (
+        <rect key={y} x="570" y={y} width="130" height="10" fill="rgb(var(--ink))" />
+      ))}
+      {[150, 210, 270].map((y) => (
+        <rect key={y} x="520" y={y - 9} width="28" height="28" fill="rgb(var(--accent))" />
+      ))}
+      <rect x="520" y="321" width="28" height="28" fill="none" stroke="rgb(var(--ink))" strokeWidth="5" />
+    </svg>
+  );
+}
+
 export default function ProjectVisual({ project, sizes }: { project: Project; sizes: string }) {
   if (project.graphic === "blocks") {
     return <BlocksGraphic />;
+  }
+
+  if (project.graphic === "voice") {
+    return <VoiceGraphic />;
   }
 
   if (project.graphic === "rail" || !project.image) {
