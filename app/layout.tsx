@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter_Tight } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import Navigation from "@/components/Navigation";
@@ -44,6 +46,10 @@ export default function RootLayout({
           {children}
           <Footer />
         </Providers>
+        {/* Vercel Web Analytics: page views and visitors, no cookies. */}
+        <Analytics />
+        {/* Vercel Speed Insights: real-visitor performance metrics. */}
+        <SpeedInsights />
       </body>
     </html>
   );
