@@ -107,10 +107,10 @@ export interface Project {
   description: string;
   tags: string[];
   image?: string;
-  /** "portrait" screenshots are shown framed rather than cropped. */
-  fit?: "cover" | "portrait";
+  /** "portrait" screenshots are shown framed rather than cropped; "logo" is centered on white. */
+  fit?: "cover" | "portrait" | "logo";
   /** Rendered instead of an image when there is no screenshot yet. */
-  graphic?: "rail" | "blocks" | "voice";
+  graphic?: "rail" | "blocks";
 }
 
 export const WORK: Project[] = [
@@ -121,7 +121,8 @@ export const WORK: Project[] = [
     kicker: "Startup · Backend engineering",
     description: "Voice-driven documentation software for field teams. I work on its serverless backend, security and CI.",
     tags: ["TypeScript", "Node.js", "AWS Lambda", "DynamoDB", "Terraform"],
-    graphic: "voice",
+    image: "/projects/smartective/logo.png",
+    fit: "logo",
   },
   {
     slug: "game-developer",

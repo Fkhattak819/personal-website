@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import DetailSection, { NextProject, TagList } from "@/components/DetailSection";
 import Reveal from "@/components/Reveal";
-import { Parallax } from "@/components/Depth";
-import { VoiceGraphic } from "@/components/ProjectVisual";
+import { LogoPanel } from "@/components/ProjectVisual";
 
 export const metadata: Metadata = { title: "Smartective" };
 
@@ -33,10 +32,8 @@ export default function SmartectivePage() {
       />
 
       <div className="container-page mt-16 pb-24 md:mt-24 md:pb-40">
-        <Reveal>
-          <Parallax className="relative aspect-[16/10] border border-ink md:aspect-[21/9]" amount={5}>
-            <VoiceGraphic />
-          </Parallax>
+        <Reveal className="aspect-[16/10] overflow-hidden border border-ink md:aspect-[21/9]">
+          <LogoPanel src="/projects/smartective/logo.png" alt="Smartective logo" sizes="(max-width: 1440px) 100vw, 1376px" />
         </Reveal>
 
         <dl className="grid grid-cols-1 border-b border-ink md:grid-cols-3">

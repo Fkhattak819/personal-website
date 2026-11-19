@@ -33,7 +33,12 @@ export default function ProjectCard({ project, index }: { project: Project; inde
               y.set(e.clientY - rect.top);
             }}
           >
-            <div className="absolute inset-0 grayscale transition-[transform,filter] duration-700 ease-swiss group-hover:scale-[1.05] group-hover:grayscale-0">
+            {/* Screenshots sit in grayscale until hovered; a logo keeps its own colors. */}
+            <div
+              className={`absolute inset-0 transition-[transform,filter] duration-700 ease-swiss group-hover:scale-[1.05] ${
+                project.fit === "logo" ? "" : "grayscale group-hover:grayscale-0"
+              }`}
+            >
               <ProjectVisual project={project} sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <motion.div aria-hidden className="hover-only pointer-events-none absolute left-0 top-0 z-10" style={{ x: sx, y: sy }}>
